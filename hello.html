@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Zayn &amp; Nora — Royal Wedding Invitation</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --sage-dark: #41563b;
+      --sage-mid: #6b7b5c;
+      --sage-foil: #859574;
+      --linen-base: #e8ddc6;
+      --linen-light: #efe6d3;
+      --linen-box: #d8cdb5;
+      --gold-accent: #b38e42;
+      --text-olive: #3e5238;
+      --text-muted: #5e6851;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #191a17;
+      color: var(--text-olive);
+      font-family: 'Cormorant Garamond', serif;
+      overflow-x: hidden;
+    }
+
+    /* Mobile-First Linen Textured Shell */
+    .app-shell {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background-color: var(--linen-base);
+      background-image:
+        repeating-linear-gradient(0deg, rgba(132, 117, 86, 0.06) 0px, rgba(132, 117, 86, 0.06) 1px, transparent 1px, transparent 4px),
+        repeating-linear-gradient(90deg, rgba(132, 117, 86, 0.06) 0px, rgba(132, 117, 86, 0.06) 1px, transparent 1px, transparent 4px),
+        linear-gradient(180deg, #ede3cf 0%, #e6dac2 50%, #dfd2b7 100%);
+      position: relative;
+      box-shadow: 0 0 55px rgba(0, 0, 0, 0.65);
+      overflow-x: hidden;
+    }
+
+    /* Top Right Sound Button */
+    .sound-btn {
+      position: fixed;
+      top: 16px;
+      right: max(16px, calc(50vw - 224px));
+      z-index: 1200;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: var(--sage-dark);
+      color: #f6efe0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+      transition: transform 0.2s;
+    }
+
+    .sound-btn:active {
+      transform: scale(0.92);
+    }
+
+    /* ==================== STAGE 1: BOTANICAL DOORS & TAP TO OPEN ==================== */
+    .door-overlay {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
+      height: 100dvh;
+      z-index: 1000;
+      display: flex;
+      pointer-events: auto;
+      overflow: hidden;
+    }
+
+    .door-overlay.opened {
+      pointer-events: none;
+    }
+
+    .door-panel {
+      width: 50%;
+      height: 100%;
+      background:
+        radial-gradient(circle at 35% 35%, rgba(154, 168, 134, 0.28), transparent 60%),
+        linear-gradient(160deg, #728162 0%, #5c6c4e 55%, #48583d 100%);
+      position: relative;
+      transition: transform 1.6s cubic-bezier(0.76, 0, 0.24, 1);
+      box-shadow: inset 0 0 55px rgba(24, 34, 21, 0.45);
+      overflow: hidden;
+    }
+
+    /* Subtle Embossed Leaf Relief on Doors */
+    .door-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.2;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='200' viewBox='0 0 160 200'%3E%3Cg fill='none' stroke='%23e8dfc8' stroke-width='1.4'%3E%3Cpath d='M25 190 Q50 120 35 25'/%3E%3Cpath d='M36 145 Q72 130 84 102 Q50 112 36 145Z' fill='%23d7ceb2' fill-opacity='0.3'/%3E%3Cpath d='M38 102 Q8 86 0 58 Q32 70 38 102Z' fill='%23d7ceb2' fill-opacity='0.3'/%3E%3Cpath d='M36 62 Q74 46 86 18 Q52 28 36 62Z' fill='%23d7ceb2' fill-opacity='0.3'/%3E%3C/g%3E%3C/svg%3E");
+      background-size: 160px 200px;
+    }
+
+    .door-left {
+      border-right: 2px solid #c9b584;
+    }
+
+    .door-right {
+      border-left: 2px solid #8c7a50;
+    }
+
+    .door-overlay.opened .door-left {
+      transform: translateX(-102%);
+    }
+
+    .door-overlay.opened .door-right {
+      transform: translateX(102%);
+    }
+
+    /* Center Scalloped Plaque ("TAP TO OPEN") */
+    .plaque-wrap {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1005;
+      cursor: pointer;
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .door-overlay.opened .plaque-wrap {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.82);
+    }
+
+    .royal-plaque {
+      width: 210px;
+      height: 262px;
+      background: linear-gradient(145deg, #f9f3e4 0%, #e4d5b5 100%);
+      border-radius: 44px;
+      border: 3px solid #bfa265;
+      outline: 5px solid #f5eedc;
+      outline-offset: -9px;
+      box-shadow:
+        0 18px 40px rgba(22, 32, 19, 0.55),
+        inset 0 0 18px rgba(179, 142, 66, 0.25);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      animation: plaquePulse 2.4s infinite ease-in-out;
+    }
+
+    .royal-plaque::before,
+    .royal-plaque::after {
+      content: "• • •";
+      position: absolute;
+      color: #fffdf7;
+      text-shadow: 0 1px 3px rgba(114, 90, 44, 0.6);
+      font-size: 16px;
+      letter-spacing: 3px;
+    }
+
+    .royal-plaque::before { top: 6px; }
+    .royal-plaque::after { bottom: 6px; }
+
+    .plaque-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      color: #6b5329;
+      margin: 14px 0;
+    }
+
+    @keyframes plaquePulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.035); }
+    }
+
+    /* ==================== STAGE 2: CURTAINS & COUPLE NAMES ==================== */
+    .hero-stage {
+      position: relative;
+      min-height: 100dvh;
+      padding: 86px 36px 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 50% 42%, rgba(252, 247, 236, 0.65), transparent 65%),
+        repeating-linear-gradient(0deg, rgba(132, 117, 86, 0.05) 0px, rgba(132, 117, 86, 0.05) 1px, transparent 1px, transparent 4px),
+        linear-gradient(180deg, #ede3cf 0%, #e2d5ba 75%, #d3c4a4 100%);
+    }
+
+    /* Top Valance Swags */
+    .curtain-valance {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 66px;
+      z-index: 4;
+      display: flex;
+      pointer-events: none;
+    }
+
+    .swag {
+      flex: 1;
+      height: 100%;
+      background: linear-gradient(180deg, #d6c8aa 0%, #f5ede0 65%, #cbbba0 100%);
+      border-radius: 0 0 50% 50%;
+      border-bottom: 4px dotted #fff8eb;
+      box-shadow: 0 6px 14px rgba(92, 77, 50, 0.25);
+    }
+
+    /* Side Silk Curtains with Pearl Trim */
+    .side-curtain {
+      position: absolute;
+      top: 0;
+      width: 23%;
+      height: 66%;
+      z-index: 3;
+      background: repeating-linear-gradient(
+        90deg,
+        #cbbba0 0px,
+        #f4ece0 8px,
+        #dfd1b7 16px,
+        #c3b296 22px
+      );
+      box-shadow: 0 10px 24px rgba(74, 62, 40, 0.25);
+      transition: transform 1.4s ease-out;
+    }
+
+    .side-curtain.left {
+      left: -3%;
+      border-radius: 0 0 85% 0;
+      border-right: 5px dotted #fffaf0;
+      transform: translateX(-25%);
+    }
+
+    .side-curtain.right {
+      right: -3%;
+      border-radius: 0 0 0 85%;
+      border-left: 5px dotted #fffaf0;
+      transform: translateX(25%);
+    }
+
+    .hero-stage.revealed .side-curtain.left,
+    .hero-stage.revealed .side-curtain.right {
+      transform: translateX(0);
+    }
+
+    /* Clean Architectural Balustrade & Marble Fountain SVG Footer (No Cartoon Emojis) */
+    .garden-footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      z-index: 2;
+      pointer-events: none;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    /* Couple Typography */
+    .hero-content {
+      position: relative;
+      z-index: 5;
+      max-width: 340px;
+    }
+
+    .top-heart {
+      width: 24px;
+      height: 24px;
+      margin: 0 auto 12px;
+      color: var(--sage-dark);
+    }
+
+    .getting-married {
+      font-size: 20px;
+      letter-spacing: 0.4px;
+      color: var(--text-olive);
+      margin-bottom: 10px;
+    }
+
+    .thin-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 14px auto;
+      width: 190px;
+    }
+
+    .thin-divider::before,
+    .thin-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: rgba(65, 86, 59, 0.38);
+    }
+
+    .thin-divider span {
+      font-size: 11px;
+      color: var(--sage-mid);
+    }
+
+    .couple-script {
+      font-family: 'Great Vibes', cursive;
+      font-size: 64px;
+      font-weight: 400;
+      line-height: 1.02;
+      color: var(--sage-dark);
+      margin: 6px 0;
+      text-shadow: 0 2px 10px rgba(255, 255, 255, 0.55);
+    }
+
+    .parent-bio {
+      font-style: italic;
+      font-size: 15px;
+      line-height: 1.45;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .ampersand-script {
+      font-family: 'Great Vibes', cursive;
+      font-size: 36px;
+      color: var(--sage-mid);
+      margin: 6px 0;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 42px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 6;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      color: var(--sage-dark);
+      animation: bounceScroll 1.8s infinite;
+    }
+
+    .scroll-indicator span {
+      display: block;
+      font-size: 18px;
+      margin-top: 2px;
+    }
+
+    @keyframes bounceScroll {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, 6px); }
+    }
+
+    /* ==================== EXACT FLORAL RAIL BORDERS (MATCHING floral-rail_2.svg) ==================== */
+    .floral-section {
+      position: relative;
+      padding: 68px 46px;
+      text-align: center;
+    }
+
+    /* Delicate Horizontal Botanical Wave Divider */
+    .wave-divider {
+      width: 100%;
+      height: 16px;
+      opacity: 0.45;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='16' viewBox='0 0 360 16'%3E%3Cpath d='M0 8 Q90 2 180 8 T360 8' fill='none' stroke='%239b8d70' stroke-width='1'/%3E%3C/svg%3E");
+      background-repeat: repeat-x;
+      background-position: center;
+    }
+
+    /* Repeating Side Vine matching your uploaded floral-rail_2.svg */
+    .floral-vine {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 44px;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='190' viewBox='0 0 48 190'%3E%3Cdefs%3E%3CradialGradient id='petal' cx='38%25' cy='35%25' r='65%25'%3E%3Cstop offset='0%25' stop-color='%23ecd5cb'/%3E%3Cstop offset='65%25' stop-color='%23c49386'/%3E%3Cstop offset='100%25' stop-color='%239c6d61'/%3E%3C/radialGradient%3E%3ClinearGradient id='leaf' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23788761'/%3E%3Cstop offset='100%25' stop-color='%23566543'/%3E%3C/linearGradient%3E%3C/defs%3E%3C!-- Main Curved Vine Stem --%3E%3Cpath d='M22 0 C14 35, 32 65, 22 95 C12 125, 32 155, 22 190' fill='none' stroke='%23687753' stroke-width='2' stroke-linecap='round'/%3E%3C!-- Teardrop Sage Leaves --%3E%3Cpath d='M18 22 C8 14, 2 18, 4 27 C6 34, 14 30, 18 22 Z' fill='url(%23leaf)'/%3E%3Cpath d='M25 42 C35 34, 42 38, 40 47 C38 54, 30 50, 25 42 Z' fill='url(%23leaf)'/%3E%3Cpath d='M18 82 C8 74, 2 78, 4 87 C6 94, 14 90, 18 82 Z' fill='url(%23leaf)'/%3E%3Cpath d='M26 108 C36 100, 43 104, 41 113 C39 120, 31 116, 26 108 Z' fill='url(%23leaf)'/%3E%3Cpath d='M18 148 C8 140, 2 144, 4 153 C6 160, 14 156, 18 148 Z' fill='url(%23leaf)'/%3E%3Cpath d='M26 172 C36 164, 43 168, 41 177 C39 184, 31 180, 26 172 Z' fill='url(%23leaf)'/%3E%3C!-- 4-Petal Dusty Rose Blossom 1 --%3E%3Cg transform='translate(24, 60)'%3E%3Ccircle cx='0' cy='-5.5' r='5' fill='url(%23petal)'/%3E%3Ccircle cx='-5.5' cy='0' r='5' fill='url(%23petal)'/%3E%3Ccircle cx='5.5' cy='0' r='5' fill='url(%23petal)'/%3E%3Ccircle cx='0' cy='5.5' r='5.5' fill='url(%23petal)'/%3E%3Ccircle cx='0' cy='1' r='2.2' fill='%23ede2b8'/%3E%3C/g%3E%3C!-- 4-Petal Dusty Rose Blossom 2 --%3E%3Cg transform='translate(20, 130)'%3E%3Ccircle cx='0' cy='-5.5' r='5' fill='url(%23petal)'/%3E%3Ccircle cx='-5.5' cy='0' r='5' fill='url(%23petal)'/%3E%3Ccircle cx='5.5' cy='0' r='5' fill='url(%23petal)'/%3E%3Ccircle cx='0' cy='5.5' r='5.5' fill='url(%23petal)'/%3E%3Ccircle cx='0' cy='1' r='2.2' fill='%23ede2b8'/%3E%3C/g%3E%3C/svg%3E");
+      background-repeat: repeat-y;
+      background-size: 44px 175px;
+      filter: drop-shadow(0 2px 3px rgba(62, 54, 38, 0.14));
+    }
+
+    .floral-vine.left { left: 2px; }
+    .floral-vine.right { right: 2px; transform: scaleX(-1); }
+
+    .section-script-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 44px;
+      font-weight: 400;
+      color: var(--sage-dark);
+      line-height: 1.1;
+    }
+
+    /* ==================== STAGE 3: HEART SCRATCH-TO-REVEAL ==================== */
+    .heart-scratch-container {
+      position: relative;
+      width: 240px;
+      height: 220px;
+      margin: 22px auto 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .heart-revealed-content {
+      width: 210px;
+      height: 195px;
+      background: radial-gradient(circle, #fbf6ea 0%, #e4d8be 100%);
+      clip-path: path('M105 185 C105 185 12 122 12 62 C12 30 37 10 64 10 C83 10 98 21 105 35 C112 21 127 10 146 10 C173 10 198 30 198 62 C198 122 105 185 105 185 Z');
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+      box-shadow: inset 0 0 20px rgba(109, 124, 94, 0.25);
+    }
+
+    .reveal-tag {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      color: var(--sage-mid);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .reveal-date {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--sage-dark);
+    }
+
+    .reveal-sub {
+      font-style: italic;
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    #heartCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 240px;
+      height: 220px;
+      touch-action: none;
+      cursor: grab;
+      filter: drop-shadow(0 6px 14px rgba(65, 86, 59, 0.26));
+    }
+
+    .sage-pill-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 28px;
+      border-radius: 999px;
+      background: var(--sage-dark);
+      color: #f8f2e4;
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(65, 86, 59, 0.28);
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .sage-pill-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* ==================== STAGE 4: AUTO-SLIDING PHOTO GALLERY & COUNTDOWN ==================== */
+    .carousel-box {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 14px 30px rgba(78, 65, 42, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      margin-bottom: 26px;
+    }
+
+    .carousel-track {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .carousel-dots {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(4px);
+      padding: 5px 10px;
+      border-radius: 20px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(65, 86, 59, 0.4);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .dot.active {
+      width: 20px;
+      border-radius: 10px;
+      background: var(--sage-dark);
+    }
+
+    /* Countdown Grid */
+    .countdown-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .count-card {
+      background: var(--linen-box);
+      border: 1px solid #c5b698;
+      border-radius: 12px;
+      padding: 14px 4px 10px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+    }
+
+    .count-num {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--sage-dark);
+    }
+
+    .count-label {
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* ==================== STAGE 5: EVENTS, RSVP & GOOGLE MAP ==================== */
+    .event-box {
+      background: rgba(248, 242, 229, 0.78);
+      border: 1px solid #cbbba0;
+      border-radius: 16px;
+      padding: 22px 18px;
+      margin: 16px 0;
+      box-shadow: 0 8px 20px rgba(84, 70, 46, 0.07);
+    }
+
+    .event-box h3 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 17px;
+      color: var(--sage-dark);
+      margin-bottom: 6px;
+    }
+
+    .event-box p {
+      font-size: 17px;
+      color: var(--text-muted);
+      margin: 3px 0;
+    }
+
+    .rsvp-card {
+      background: var(--sage-dark);
+      color: #f6efe0;
+      padding: 46px 26px;
+      text-align: center;
+    }
+
+    .rsvp-card .section-script-title {
+      color: #f4ead4;
+    }
+
+    .rsvp-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .rsvp-form input,
+    .rsvp-form select,
+    .rsvp-form textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid #c9ba9b;
+      background: #f8f2e4;
+      color: var(--sage-dark);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      outline: none;
+    }
+
+    .gold-submit-btn {
+      background: var(--gold-accent);
+      color: #fffaf0;
+      border: none;
+      border-radius: 999px;
+      padding: 13px 26px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 4px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Map Section */
+    .map-section {
+      position: relative;
+      padding: 54px 46px 104px;
+      text-align: center;
+    }
+
+    .map-frame {
+      width: 100%;
+      height: 240px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 2px solid #c5b698;
+      box-shadow: 0 10px 24px rgba(65, 86, 59, 0.16);
+      margin: 18px 0 22px;
+    }
+
+    .map-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Bottom Floating Pills */
+    .floating-bar {
+      position: fixed;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 28px);
+      max-width: 452px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 900;
+      pointer-events: none;
+    }
+
+    .float-pill {
+      pointer-events: auto;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .float-pill.light {
+      background: #f9f4e8;
+      color: #464338;
+    }
+
+    .float-pill.gold {
+      background: var(--gold-accent);
+      color: #fff9eb;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Music -->
+  <audio id="weddingMusic" loop preload="auto">
+    <source src="https://cdn.pixabay.com/download/audio/2022/02/22/audio_d1718ab41b.mp3?filename=romantic-piano-110221.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="app-shell">
+    <!-- Top Right Music Button -->
+    <button class="sound-btn" id="soundToggle" aria-label="Toggle Sound">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <line x1="23" y1="9" x2="17" y2="15"></line>
+        <line x1="17" y1="9" x2="23" y2="15"></line>
+      </svg>
+    </button>
+
+    <!-- ==================== 1. TAP TO OPEN BOTANICAL DOORS ==================== -->
+    <div class="door-overlay" id="doorOverlay">
+      <div class="door-panel door-left"></div>
+      <div class="door-panel door-right"></div>
+
+      <div class="plaque-wrap" id="openBtn">
+        <div class="royal-plaque">
+          <!-- Classic Botanical Crest SVG (No Emoji) -->
+          <svg width="34" height="34" viewBox="0 0 36 36" fill="none">
+            <path d="M18 32V8M18 22C12 20 9 15 10 10C15 11 18 16 18 22ZM18 18C24 16 27 11 26 6C21 7 18 12 18 18Z" stroke="#967536" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          <div class="plaque-title">TAP TO OPEN</div>
+          <svg width="34" height="34" viewBox="0 0 36 36" fill="none" style="transform: rotate(180deg);">
+            <path d="M18 32V8M18 22C12 20 9 15 10 10C15 11 18 16 18 22ZM18 18C24 16 27 11 26 6C21 7 18 12 18 18Z" stroke="#967536" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 2. CURTAINS & BRIDE / GROOM NAMES ==================== -->
+    <section class="hero-stage" id="heroStage">
+      <div class="curtain-valance">
+        <div class="swag"></div>
+        <div class="swag"></div>
+        <div class="swag"></div>
+      </div>
+      <div class="side-curtain left"></div>
+      <div class="side-curtain right"></div>
+
+      <div class="hero-content">
+        <div class="top-heart">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        </div>
+        <p class="getting-married">We're getting married</p>
+        <div class="thin-divider"><span>♥</span></div>
+
+        <h1 class="couple-script">Zayn</h1>
+        <p class="parent-bio">
+          Son of Mr. &amp; Mrs. Malik<br>
+          B.E., M.S.<br>
+          Data Scientist
+        </p>
+
+        <div class="ampersand-script">&amp;</div>
+
+        <h1 class="couple-script">Nora</h1>
+        <p class="parent-bio">
+          Daughter of Mr. &amp; Mrs. Nasser<br>
+          MBBS, M.D.<br>
+          Pediatrician
+        </p>
+      </div>
+
+      <!-- Architectural Balustrade & Marble Fountain SVG (No Cartoon Emojis) -->
+      <div class="garden-footer">
+        <svg width="100%" height="110" viewBox="0 0 480 110" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="stone" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#f3ead8"/>
+              <stop offset="100%" stop-color="#c9ba9b"/>
+            </linearGradient>
+            <radialGradient id="water" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#9cb5b8"/>
+              <stop offset="100%" stop-color="#688488"/>
+            </radialGradient>
+          </defs>
+          <!-- Classical Stone Balustrade Wall -->
+          <rect x="0" y="72" width="160" height="38" fill="url(#stone)" opacity="0.85"/>
+          <rect x="320" y="72" width="160" height="38" fill="url(#stone)" opacity="0.85"/>
+          <!-- Marble Fountain Basin -->
+          <ellipse cx="240" cy="92" rx="74" ry="15" fill="url(#stone)" stroke="#b8a786" stroke-width="1.5"/>
+          <ellipse cx="240" cy="90" rx="64" ry="11" fill="url(#water)"/>
+          <!-- Fountain Pedestal & Tier -->
+          <rect x="234" y="66" width="12" height="24" fill="url(#stone)"/>
+          <ellipse cx="240" cy="66" rx="28" ry="6" fill="url(#stone)" stroke="#b8a786" stroke-width="1"/>
+          <path d="M216 68 Q210 80 212 90 M264 68 Q270 80 268 90" stroke="#e8f1f2" stroke-width="1.2" fill="none" opacity="0.75"/>
+        </svg>
+      </div>
+
+      <div class="scroll-indicator">
+        SCROLL
+        <span>⌄</span>
+      </div>
+    </section>
+
+    <div class="wave-divider"></div>
+
+    <!-- ==================== 3. HEART SHAPE SCRATCH TO REVEAL DATE ==================== -->
+    <section class="floral-section">
+      <div class="floral-vine left"></div>
+      <div class="floral-vine right"></div>
+
+      <h2 class="section-script-title">Scratch to Reveal</h2>
+      <div class="thin-divider"><span>♥</span></div>
+
+      <div class="heart-scratch-container">
+        <div class="heart-revealed-content">
+          <span class="reveal-tag">The Wedding Date</span>
+          <span class="reveal-date">12 • 12 • 2026</span>
+          <span class="reveal-sub">Saturday • 7:00 PM</span>
+        </div>
+        <canvas id="heartCanvas" width="240" height="220"></canvas>
+      </div>
+
+      <a class="sage-pill-btn" id="saveDateBtn" href="#" download="Zayn-Nora-Wedding.ics">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        SAVE THE DATE
+      </a>
+    </section>
+
+    <div class="wave-divider"></div>
+
+    <!-- ==================== 4. AUTO-SLIDING COUPLE IMAGES & COUNTDOWN ==================== -->
+    <section class="floral-section">
+      <div class="floral-vine left"></div>
+      <div class="floral-vine right"></div>
+
+      <div class="thin-divider" style="margin-top: 0;"><span>♥</span></div>
+
+      <div class="carousel-box" id="carouselBox">
+        <div class="carousel-track" id="carouselTrack">
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80" alt="Couple Rings">
+          </div>
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=80" alt="Wedding Moment">
+          </div>
+          <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=900&q=80" alt="Couple Portrait">
+          </div>
+        </div>
+        <div class="carousel-dots" id="carouselDots">
+          <span class="dot active" data-index="0"></span>
+          <span class="dot" data-index="1"></span>
+          <span class="dot" data-index="2"></span>
+        </div>
+      </div>
+
+      <div class="wave-divider" style="margin: 18px 0;"></div>
+      <h2 class="section-script-title">Counting Down to<br>Forever</h2>
+      <div class="thin-divider"><span>♥</span></div>
+
+      <div class="countdown-row">
+        <div class="count-card"><span class="count-num" id="cdDays">00</span><span class="count-label">Days</span></div>
+        <div class="count-card"><span class="count-num" id="cdHours">00</span><span class="count-label">Hours</span></div>
+        <div class="count-card"><span class="count-num" id="cdMins">00</span><span class="count-label">Minutes</span></div>
+        <div class="count-card"><span class="count-num" id="cdSecs">00</span><span class="count-label">Seconds</span></div>
+      </div>
+    </section>
+
+    <div class="wave-divider"></div>
+
+    <!-- ==================== 5. CEREMONY DETAILS ==================== -->
+    <section class="floral-section">
+      <div class="floral-vine left"></div>
+      <div class="floral-vine right"></div>
+
+      <h2 class="section-script-title">Wedding Events</h2>
+      <div class="thin-divider"><span>♥</span></div>
+
+      <div class="event-box">
+        <h3>Royal Nikah &amp; Ceremony</h3>
+        <p><strong>Saturday, 12 December 2026</strong></p>
+        <p>7:00 PM Onwards</p>
+        <p>The Oberoi Rajvilas, Jaipur</p>
+      </div>
+
+      <div class="event-box">
+        <h3>Grand Reception</h3>
+        <p><strong>Sunday, 13 December 2026</strong></p>
+        <p>8:00 PM Onwards</p>
+        <p>The Royal Courtyard, Jaipur</p>
+      </div>
+    </section>
+
+    <!-- ==================== 6. RSVP / CONTACT FORM ==================== -->
+    <section class="rsvp-card" id="rsvpSection">
+      <h2 class="section-script-title">Kindly RSVP</h2>
+      <p style="font-size: 17px; opacity: 0.9;">We look forward to celebrating with you</p>
+
+      <form class="rsvp-form" id="rsvpForm">
+        <input type="text" id="guestName" placeholder="Your Full Name" required>
+        <input type="number" id="guestCount" placeholder="Number of Guests (e.g. 2)" min="1" max="10" required>
+        <select id="guestStatus">
+          <option value="Joyfully Accepts">Joyfully Accepts</option>
+          <option value="Regretfully Declines">Regretfully Declines</option>
+        </select>
+        <textarea id="guestNote" rows="2" placeholder="Wishes for Zayn & Nora (optional)"></textarea>
+        <button type="submit" class="gold-submit-btn">Send RSVP</button>
+      </form>
+      <p id="rsvpToast" style="margin-top: 12px; font-size: 16px; color: #f5d88c;"></p>
+    </section>
+
+    <!-- ==================== 7. GOOGLE MAP LOCATION ==================== -->
+    <section class="map-section">
+      <div class="floral-vine left"></div>
+      <div class="floral-vine right"></div>
+
+      <h2 class="section-script-title">Venue Location</h2>
+      <div class="thin-divider"><span>♥</span></div>
+      <p style="font-size: 17px; color: var(--text-muted);">The Oberoi Rajvilas, Goner Road, Jaipur</p>
+
+      <div class="map-frame">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.591952964246!2d75.89197367543852!3d26.88470317666389!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db68d0a1a5f5f%3A0x8f8e8c8b8b8b8b8b!2sThe%20Oberoi%20Rajvilas%2C%20Jaipur!5e0!3m2!1sen!2sin!4v1700000000000"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Wedding Venue Map">
+        </iframe>
+      </div>
+
+      <a class="sage-pill-btn" href="https://maps.google.com/?q=The+Oberoi+Rajvilas+Jaipur" target="_blank" rel="noreferrer">
+        OPEN IN GOOGLE MAPS
+      </a>
+    </section>
+
+    <!-- Bottom Floating Controls -->
+    <div class="floating-bar">
+      <button class="float-pill light" id="langBtn">🌐 English</button>
+      <a class="float-pill gold" href="#rsvpSection">✦ RSVP Now</a>
+    </div>
+  </div>
+
+  <script>
+    // 1. Open Botanical Doors & Reveal Curtains + Music
+    const doorOverlay = document.getElementById('doorOverlay');
+    const heroStage = document.getElementById('heroStage');
+    const music = document.getElementById('weddingMusic');
+    const soundToggle = document.getElementById('soundToggle');
+    let isPlaying = false;
+
+    const iconMuted = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>`;
+    const iconSound = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>`;
+
+    document.getElementById('openBtn').addEventListener('click', () => {
+      doorOverlay.classList.add('opened');
+      heroStage.classList.add('revealed');
+      music.play().then(() => {
+        isPlaying = true;
+        soundToggle.innerHTML = iconSound;
+      }).catch(() => {});
+      setTimeout(() => {
+        doorOverlay.style.display = 'none';
+      }, 1700);
+    });
+
+    soundToggle.addEventListener('click', () => {
+      if (isPlaying) {
+        music.pause();
+        soundToggle.innerHTML = iconMuted;
+      } else {
+        music.play();
+        soundToggle.innerHTML = iconSound;
+      }
+      isPlaying = !isPlaying;
+    });
+
+    // 2. Heart-Shaped Canvas Scratch Card (Matching Reference Speckled Sage Foil)
+    const canvas = document.getElementById('heartCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function drawHeartScratchLayer() {
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(120, 200);
+      ctx.bezierCurveTo(120, 200, 18, 132, 18, 66);
+      ctx.bezierCurveTo(18, 30, 46, 8, 76, 8);
+      ctx.bezierCurveTo(96, 8, 112, 20, 120, 35);
+      ctx.bezierCurveTo(128, 20, 144, 8, 164, 8);
+      ctx.bezierCurveTo(194, 8, 222, 30, 222, 66);
+      ctx.bezierCurveTo(222, 132, 120, 200, 120, 200);
+      ctx.closePath();
+      ctx.clip();
+
+      const grad = ctx.createRadialGradient(110, 92, 12, 120, 105, 125);
+      grad.addColorStop(0, '#ddd8c4');
+      grad.addColorStop(0.55, '#8c9b7c');
+      grad.addColorStop(1, '#5c6e4e');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 240, 220);
+
+      for (let i = 0; i < 850; i++) {
+        ctx.fillStyle = Math.random() > 0.35
+          ? `rgba(255, 252, 238, ${Math.random() * 0.65})`
+          : `rgba(52, 68, 44, ${Math.random() * 0.45})`;
+        ctx.beginPath();
+        ctx.arc(Math.random() * 240, Math.random() * 220, Math.random() * 1.6, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+    drawHeartScratchLayer();
+
+    let isScratching = false;
+    function scratchAt(clientX, clientY) {
+      const rect = canvas.getBoundingClientRect();
+      const x = (clientX - rect.left) * (canvas.width / rect.width);
+      const y = (clientY - rect.top) * (canvas.height / rect.height);
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.beginPath();
+      ctx.arc(x, y, 22, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    canvas.addEventListener('pointerdown', (e) => {
+      isScratching = true;
+      canvas.setPointerCapture(e.pointerId);
+      scratchAt(e.clientX, e.clientY);
+    });
+    canvas.addEventListener('pointermove', (e) => {
+      if (isScratching) scratchAt(e.clientX, e.clientY);
+    });
+    canvas.addEventListener('pointerup', () => { isScratching = false; });
+    canvas.addEventListener('pointercancel', () => { isScratching = false; });
+
+    // 3. Auto-Sliding Photo Carousel
+    const track = document.getElementById('carouselTrack');
+    const dots = document.querySelectorAll('.dot');
+    let slideIndex = 0;
+    const totalSlides = dots.length;
+
+    function goToSlide(idx) {
+      slideIndex = (idx + totalSlides) % totalSlides;
+      track.style.transform = `translateX(-${slideIndex * 100}%)`;
+      dots.forEach((d, i) => d.classList.toggle('active', i === slideIndex));
+    }
+
+    let autoSlide = setInterval(() => goToSlide(slideIndex + 1), 3200);
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        clearInterval(autoSlide);
+        goToSlide(Number(dot.dataset.index));
+        autoSlide = setInterval(() => goToSlide(slideIndex + 1), 3200);
+      });
+    });
+
+    // 4. Live Countdown Timer
+    const targetDate = new Date('2026-12-12T19:00:00').getTime();
+    function updateTimer() {
+      const diff = Math.max(0, targetDate - Date.now());
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((diff / 1000 / 60) % 60);
+      const s = Math.floor((diff / 1000) % 60);
+      document.getElementById('cdDays').textContent = String(d).padStart(2, '0');
+      document.getElementById('cdHours').textContent = String(h).padStart(2, '0');
+      document.getElementById('cdMins').textContent = String(m).padStart(2, '0');
+      document.getElementById('cdSecs').textContent = String(s).padStart(2, '0');
+    }
+    updateTimer();
+    setInterval(updateTimer, 1000);
+
+    // 5. Save the Date (.ics file download)
+    document.getElementById('saveDateBtn').addEventListener('click', (e) => {
+      const ics = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'BEGIN:VEVENT',
+        'DTSTART:20261212T133000Z',
+        'DTEND:20261212T183000Z',
+        'SUMMARY:Zayn & Nora Wedding Ceremony',
+        'LOCATION:The Oberoi Rajvilas, Jaipur',
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\n');
+      const blob = new Blob([ics], { type: 'text/calendar' });
+      e.currentTarget.href = URL.createObjectURL(blob);
+    });
+
+    // 6. RSVP Form Handler
+    document.getElementById('rsvpForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('guestName').value;
+      document.getElementById('rsvpToast').textContent = `Shukriya ${name}! Aapka RSVP receive ho gaya hai.`;
+      e.target.reset();
+    });
+
+    // 7. Language Button Toggle
+    let isHindi = false;
+    document.getElementById('langBtn').addEventListener('click', (e) => {
+      isHindi = !isHindi;
+      e.currentTarget.textContent = isHindi ? '🌐 हिंदी' : '🌐 English';
+    });
+  </script>
+</body>
+</html>
